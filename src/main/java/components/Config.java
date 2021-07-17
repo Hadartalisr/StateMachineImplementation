@@ -1,25 +1,29 @@
-package code.StateMachineImplementation;
+package components;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import States.ClickState;
+import States.DoubleClickState;
 import machine.factory.MachineFactory;
 import machine.models.Machine;
 import machine.models.State;
 
 @Configuration
+@ComponentScan({"States"})
 public class Config {
 
 
 	@Autowired
-	StateA stateA;
+	ClickState stateA;
 
 	@Autowired
-	StateB stateB;
+	DoubleClickState stateB;
 	
 	@Bean
 	public MachineFactory getMachineFactory() {

@@ -1,4 +1,4 @@
-package code.StateMachineImplementation;
+package components;
 
 import java.util.Scanner;
 
@@ -14,23 +14,25 @@ import machine.models.MachineProcessResponse;
 @SpringBootApplication
 public class StateMachineImplementationApplication {
 	
-	private static final String ENTER_EVENT_STRING = "Enter event :";
 	
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(StateMachineImplementationApplication.class, args);
-		Machine machine = context.getBean(Machine.class);
-		Scanner scanner = new Scanner(System.in);
-		System.out.println(ENTER_EVENT_STRING);
-		while (scanner.hasNext() == true) {
-			String input = scanner.next();
-			Event<String> event = new Event<String>(input);
-			MachineProcessResponse machineProcessResponse = machine.process(event);
-			System.out.println(machineProcessResponse);
-			System.out.println(ENTER_EVENT_STRING);
-		}
+		SpringApplication.run(StateMachineImplementationApplication.class, args);
 	}
 	
 	
+// 	private static final String ENTER_EVENT_STRING = "Enter event :";
+	
+	
+//	Machine machine = context.getBean(Machine.class);
+//	Scanner scanner = new Scanner(System.in);
+//	System.out.println(ENTER_EVENT_STRING);
+//	while (scanner.hasNext() == true) {
+//		String input = scanner.next();
+//		Event<String> event = new Event<String>(input);
+//		MachineProcessResponse machineProcessResponse = machine.process(event);
+//		System.out.println(machineProcessResponse);
+//		System.out.println(ENTER_EVENT_STRING);
+//	}
 	
 	
 //	@Override
