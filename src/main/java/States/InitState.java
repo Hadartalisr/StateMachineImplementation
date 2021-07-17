@@ -3,11 +3,14 @@ package States;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import machine.models.Event;
 import machine.models.State;
 import models.Click;
 import models.DoubleClick;
 
+@Component
 public class InitState extends State{
 	
 	protected List<Class<? extends State>> allPossibleCalculations;

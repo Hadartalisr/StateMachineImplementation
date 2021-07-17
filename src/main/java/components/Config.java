@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import States.ClickState;
 import States.DoubleClickState;
+import States.InitState;
 import machine.factory.MachineFactory;
 import machine.models.Machine;
 import machine.models.State;
@@ -25,6 +26,9 @@ public class Config {
 	@Autowired
 	DoubleClickState stateB;
 	
+	@Autowired
+	InitState initState;
+	
 	@Bean
 	public MachineFactory getMachineFactory() {
 		return new MachineFactory();
@@ -33,6 +37,7 @@ public class Config {
 	@Bean
 	public Machine getMachine(){		
 		List<State> states = new ArrayList<>();
+		states.add(initState);
 		states.add(stateA);
 		states.add(stateB);
 		return getMachineFactory().getMachineA(states, 0);
