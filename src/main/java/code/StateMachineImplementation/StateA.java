@@ -11,7 +11,7 @@ import machine.models.State;
 public class StateA extends State {
 
 	List<Class<? extends State>> allPossibleCalculations;
-
+	
 	public StateA() {
 		this.allPossibleCalculations = new ArrayList<>();
 		this.allPossibleCalculations.add(StateA.class); // 0

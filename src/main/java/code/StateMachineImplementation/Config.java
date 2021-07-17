@@ -14,21 +14,24 @@ import machine.models.State;
 @Configuration
 public class Config {
 
-	@Autowired
-	MachineFactory machineFactory;
 
 	@Autowired
 	StateA stateA;
 
 	@Autowired
 	StateB stateB;
+	
+	@Bean
+	public MachineFactory getMachineFactory() {
+		return new MachineFactory();
+	}
 
 	@Bean
-	public Machine getMachine(){
+	public Machine getMachine(){		
 		List<State> states = new ArrayList<>();
 		states.add(stateA);
 		states.add(stateB);
-		return this.machineFactory.getMachineA(states, 0);
+		return getMachineFactory().getMachineA(states, 0);
 	}
 
 }

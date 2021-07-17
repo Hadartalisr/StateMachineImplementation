@@ -1,4 +1,4 @@
-package code.StateMachineImplementation.utils;
+package utils;
 
 import java.awt.Color;
 import java.util.Random;
