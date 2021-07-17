@@ -1,5 +1,5 @@
 package models;
 
-public interface DoubleClick {
+public class DoubleClick {
 
 }

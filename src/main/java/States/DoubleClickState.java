@@ -16,7 +16,7 @@ import models.DoubleClick;
 public class DoubleClickState extends State {
 
 	private AtomicInteger count = new AtomicInteger(1);
-	private static final int COUNT_TO_PRINT = 1; // the amount of events in order to
+	private static final int COUNT_TO_PRINT = 3; // the amount of events in order to
 	protected List<Class<? extends State>> allPossibleCalculations;
 
 	public DoubleClickState() {
@@ -35,7 +35,7 @@ public class DoubleClickState extends State {
 				return calc == COUNT_TO_PRINT ? 0 : calc;
 			};
 			int previousCount = this.count.getAndAccumulate(1, ibo);
-			if (previousCount == COUNT_TO_PRINT) {
+			if (previousCount+1 == COUNT_TO_PRINT) {
 				System.out.println("OMG! 3 Double Clicks were emitted !!!");
 			}
 		} else {// if the machine should be switched into other state

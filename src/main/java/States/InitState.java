@@ -14,7 +14,7 @@ import models.DoubleClick;
 public class InitState extends State{
 	
 	protected List<Class<? extends State>> allPossibleCalculations;
-
+	
 	public InitState() {
 		this.allPossibleCalculations = new ArrayList<>();
 		this.allPossibleCalculations.add(ClickState.class); // 0
