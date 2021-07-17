@@ -1,5 +1,6 @@
 package models;
 
-public interface Click {
-
+public class Click {
+	
+	
 }
