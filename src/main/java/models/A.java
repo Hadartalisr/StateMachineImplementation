@@ -1,6 +1,6 @@
 package models;
 
-public class Click {
+public class A {
 	
 	
 }
