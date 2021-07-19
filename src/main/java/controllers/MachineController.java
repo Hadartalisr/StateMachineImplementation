@@ -71,6 +71,15 @@ public class MachineController {
 		return new ResponseEntity<Boolean>(returnBool, httpStatus);
 	}
 
+	@PostMapping("/startAfterMaintenance")
+	public ResponseEntity<Boolean> startAfterMaintenance() {
+		HttpStatus httpStatus = HttpStatus.OK;
+		Boolean returnBool = true;
+		this.machineService.startAfterMaintenance();
+		//TODO add try catch
+		return new ResponseEntity<Boolean>(returnBool, httpStatus);
+	}
+
 	@PostMapping("/stop")
 	public ResponseEntity<Boolean> stop() {
 		HttpStatus httpStatus = HttpStatus.OK;

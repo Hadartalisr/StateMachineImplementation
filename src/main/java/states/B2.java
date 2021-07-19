@@ -23,6 +23,7 @@ public class B2 extends State {
 			nextStateClass = A1.class;
 		}
 		else if(eventClass.equals(B.class)) {
+			System.out.println("3 B events were emitted !!!");
 			nextStateClass = B3.class;
 		}
 		return nextStateClass;

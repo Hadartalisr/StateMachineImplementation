@@ -20,6 +20,7 @@ public class A2 extends State {
 		Class<? extends State> nextStateClass = EntryState.class; // the default is to stay in the current state
 		Class<?> eventClass = event.getEventType();
 		if(eventClass.equals(A.class)) {
+			System.out.println("3 A events were emitted !!!");
 			nextStateClass = A3.class;
 		}
 		else if(eventClass.equals(B.class)) {

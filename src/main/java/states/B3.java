@@ -14,9 +14,6 @@ import models.B;
 
 public class B3 extends State {
 
-	public B3() {
-		System.out.println("3 B events were emitted !!!");
-	}
 
 	@Override
 	public Class<? extends State> calculate(Event<?> event) {
