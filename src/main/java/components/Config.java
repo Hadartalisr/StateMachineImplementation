@@ -3,12 +3,9 @@ package components;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import machine.factory.MachineFactory;
 import machine.models.Machine;
 import machine.models.State;
-import states.A1;
-import states.B1;
-import states.EntryState;
 
 @Configuration
 @ComponentScan({"States"})

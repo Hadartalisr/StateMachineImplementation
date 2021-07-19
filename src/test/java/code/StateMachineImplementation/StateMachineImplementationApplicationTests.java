@@ -8,6 +8,7 @@ class StateMachineImplementationApplicationTests {
 
 	@Test
 	void contextLoads() {
+		//TODO add some tests
 	}
 
 }
