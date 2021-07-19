@@ -57,6 +57,7 @@ public class MachineService {
 		try {
 			clazz = Class.forName(String.format("models.%s", type));
 		} catch (ClassNotFoundException e) {
+			//TODO handle
 		}
 		if (clazz != null) {// if the event class exists in the project
 			object = new Gson().fromJson(json, clazz); // TODO try catch on the parse

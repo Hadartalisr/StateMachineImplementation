@@ -29,7 +29,7 @@ public class MachineController {
 
 	@GetMapping("/isRunning")
 	public ResponseEntity<Boolean> isRunning() {
-		return new ResponseEntity<Boolean>(this.machineService.isRunning(), HttpStatus.OK);
+		return new ResponseEntity<>(this.machineService.isRunning(), HttpStatus.OK);
 	}
 
 	@GetMapping("/currentState")
@@ -40,13 +40,13 @@ public class MachineController {
 		} else {
 			return new ResponseEntity<>("ERROR - the machine is not Running.", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<State>(state, HttpStatus.OK);
+		return new ResponseEntity<>(state, HttpStatus.OK);
 	}
 
 	@GetMapping("/states")
 	public ResponseEntity<Set<Class<? extends State>>> getAllStates() {
 		Set<Class<? extends State>> states = this.machineService.getAllStates();
-		return new ResponseEntity<Set<Class<? extends State>>>(states, HttpStatus.OK);
+		return new ResponseEntity<>(states, HttpStatus.OK);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -67,7 +67,7 @@ public class MachineController {
 			returnBool = false;
 			httpStatus = HttpStatus.BAD_REQUEST;
 		}
-		return new ResponseEntity<Boolean>(returnBool, httpStatus);
+		return new ResponseEntity<>(returnBool, httpStatus);
 	}
 
 	@PostMapping("/startAfterMaintenance")
@@ -76,7 +76,7 @@ public class MachineController {
 		Boolean returnBool = true;
 		this.machineService.startAfterMaintenance();
 		//TODO add try catch
-		return new ResponseEntity<Boolean>(returnBool, httpStatus);
+		return new ResponseEntity<>(returnBool, httpStatus);
 	}
 
 	@PostMapping("/stop")
@@ -84,14 +84,14 @@ public class MachineController {
 		HttpStatus httpStatus = HttpStatus.OK;
 		Boolean returnBool = true;
 		this.machineService.stop();
-		return new ResponseEntity<Boolean>(returnBool, httpStatus);
+		return new ResponseEntity<>(returnBool, httpStatus);
 	}
 
 	@PostMapping("/process")
 	public ResponseEntity<MachineProcessResponse> process(@RequestBody Object eventObject) {
 		HttpStatus httpStatus = HttpStatus.OK;
 		MachineProcessResponse processResponse = this.machineService.process(eventObject);
-		return new ResponseEntity<MachineProcessResponse>(processResponse, httpStatus);
+		return new ResponseEntity<>(processResponse, httpStatus);
 	}
 
 }
