@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -30,12 +33,37 @@ public class MachineController {
 		return new ResponseEntity<Boolean>(this.machineService.isRunning(), HttpStatus.OK);
 	}
 
-	@PostMapping("/isRunning/{isRunning}")
-	public ResponseEntity<Boolean> setIsRunning(@PathVariable String isRunning) {
+	@GetMapping("/currentState")
+	public ResponseEntity<?> getCurrentState() {
+		State state = null;
+		if (this.machineService.isRunning()) {
+			state = this.machineService.getCurrentState();
+		} else {
+			return new ResponseEntity<>("ERROR - the machine is not Running.", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<State>(state, HttpStatus.OK);
+	}
+
+	@GetMapping("/states")
+	public ResponseEntity<Set<Class<? extends State>>> getAllStates() {
+		Set<Class<? extends State>> states = this.machineService.getAllStates();
+		return new ResponseEntity<Set<Class<? extends State>>>(states, HttpStatus.OK);
+	}
+
+	@SuppressWarnings("unchecked")
+	@PostMapping("/start/{stateClassName}")
+	public ResponseEntity<Boolean> start(@PathVariable String stateClassName) {
 		HttpStatus httpStatus = HttpStatus.OK;
 		Boolean returnBool = true;
-		if (isRunning.equalsIgnoreCase("true") || isRunning.equalsIgnoreCase("false")) {
-			this.machineService.setIsRunning(Boolean.valueOf(isRunning));
+		Class<? extends State> entryStateClass = null;
+		try {
+			entryStateClass = (Class<? extends State>) Class.forName(stateClassName);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (entryStateClass instanceof Class<?>) { // TODO handle if the string is not a class
+			this.machineService.start(entryStateClass);
 		} else {
 			returnBool = false;
 			httpStatus = HttpStatus.BAD_REQUEST;
@@ -43,10 +71,12 @@ public class MachineController {
 		return new ResponseEntity<Boolean>(returnBool, httpStatus);
 	}
 
-	@GetMapping("/currentState")
-	public ResponseEntity<State> getCurrentState() {
-		State state = this.machineService.getCurrentState();
-		return new ResponseEntity<State>(state, HttpStatus.OK);
+	@PostMapping("/stop")
+	public ResponseEntity<Boolean> stop() {
+		HttpStatus httpStatus = HttpStatus.OK;
+		Boolean returnBool = true;
+		this.machineService.stop();
+		return new ResponseEntity<Boolean>(returnBool, httpStatus);
 	}
 
 	@PostMapping("/process")

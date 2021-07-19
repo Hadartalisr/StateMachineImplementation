@@ -33,7 +33,7 @@ public class Config {
 	public Machine getMachine(){		
 		String packageName = "states";
 		Set<Class<? extends State>> statesClasses = this.getClassesInPackage(packageName);
-		return getMachineFactory().getMachine(statesClasses, EntryState.class);
+		return getMachineFactory().getMachine(statesClasses);
 	}
 	
 	@SuppressWarnings("unchecked")

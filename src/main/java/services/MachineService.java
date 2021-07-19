@@ -1,5 +1,8 @@
 package services;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -18,7 +21,7 @@ import machine.models.Status;
 
 @Service
 @Component
-@ComponentScan({"components"})
+@ComponentScan({ "components" })
 public class MachineService {
 
 	@Autowired
@@ -28,14 +31,19 @@ public class MachineService {
 		return this.machine.isRunning();
 	}
 
-	public void setIsRunning(boolean isRunning) {
+	public Set<Class<? extends State>> getAllStates() {
+		return this.machine.getAllStates();
+	}
+
+
+	public void start(Class<? extends State> entryStateClass) {
 		// TODO implement what happens when the machine is already running
-		if(isRunning) {
-			this.machine.start();	
-		}
-		else {
-			this.machine.stop();
-		}
+		this.machine.start(entryStateClass);
+	}
+	
+	public void stop() {
+		// TODO implement what happens when the machine is already running
+		this.machine.stop();
 	}
 
 	public MachineProcessResponse process(Object eventObject) {
@@ -47,10 +55,11 @@ public class MachineService {
 		MachineProcessResponse machineProcessResponse = null;
 		try {
 			clazz = Class.forName(String.format("models.%s", type));
-		} catch (ClassNotFoundException e) {}
-		if(clazz != null) {// if the event class exists in the project 
-			object = new Gson().fromJson(json, clazz); //TODO try catch on the parse
-			Event<?> event = new Event<>(object);   
+		} catch (ClassNotFoundException e) {
+		}
+		if (clazz != null) {// if the event class exists in the project
+			object = new Gson().fromJson(json, clazz); // TODO try catch on the parse
+			Event<?> event = new Event<>(object);
 			machineProcessResponse = this.machine.process(event);
 		}
 		return machineProcessResponse;
